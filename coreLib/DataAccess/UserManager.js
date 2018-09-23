@@ -5,7 +5,8 @@ class UserManage {
         this.mongoose = require('mongoose');
         //  this.User = require('../../models/users')
         this.User = userModel;
-        this.passport  = require('passport');
+        this.passport = require('passport');
+        this.bcrypt = require('bcryptjs');
     }
 
 
@@ -27,19 +28,29 @@ class UserManage {
     login(passport) {
         passport.use(new this.LocalStrategy({
             usernameField: 'username',
-            passwordField: 'password'
-        }, (username, password, done) => {
+            passwordField: 'password',
+            passReqToCallback:true
+        }, (req,username, password, done) => {
             this.User.findOne({
                 userName: username
             }).then((user) => {
-                if (user && user.password == password) {
-                    console.log('Login Success');
-                    return done(null, user);
+                if (user) {
+
+                    this.bcrypt.compare(password, user.password, (err, isMatch) => {
+                        if (err) throw err;
+                        if (isMatch) {
+                            // console.log('Login Success');
+                            return done(null, user);
+                        } else {
+                            // console.log('Login Error wrong password');
+                            return done(null, false, req.flash('Error msg',"Incorrect Password"));
+
+                        }
+                    })
+
                 } else {
-                    console.log('Login Error');
-                    return done(null, false, {
-                        message: 'Login Error'
-                    });
+                    // console.log('Login Error user does not exist');
+                    return done(null, false,req.flash('Error msg',"User does not exist"));
 
                 }
             })
@@ -54,16 +65,16 @@ class UserManage {
             require('../../models/users');
             const User = mongoose.model('users')
 
-            User.findById(id, function(err, user) {
+            User.findById(id, function (err, user) {
                 done(err, user);
-              });
-        
+            });
+
         });
-        
+
 
     }
 
-    
+
 
 }
 

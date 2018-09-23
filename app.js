@@ -62,6 +62,7 @@ UserManagerObj.login(passport);
 app.use((req, res, next) => {
     res.locals.success_msg = req.flash('Success msg');
     res.locals.error_msg = req.flash('Error msg');
+    // req.locals.error = req.flash('error') || null;
     res.locals.user = req.user || null;
     next();
 })
