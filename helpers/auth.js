@@ -4,7 +4,7 @@ module.exports = {
             return next();
         } else {
             req.flash('Error msg', 'Dont get lost!');
-            res.redirect('/');
+            res.redirect('/users/dashboard');
         }
     },
     ensureNonAuthenticated: function (req, res, next) {

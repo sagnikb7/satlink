@@ -1,2 +1,52 @@
-<h1>Welcome Collector</h1>
-<h3>{{user.userName}}</h3>
+<!--collector dashboard -->
+
+<div class="row mb-4 ml-2 mt-1">
+
+    <h4> <b>Welcome: </b> &nbsp; {{user.userName}}<span class="badge badge-pill teal">{{user.role}}</span></h4>
+
+</div>
+
+
+<!-- Card deck -->
+<div class="card-deck">
+
+    <!-- Card -->
+    <div class="card mb-4">
+
+        <!--Card content-->
+        <h4 class="card-header amber lighten-3 font-weight-bold text-black"><i class="fas fa-money-check-alt"></i>&nbsp;Payments</h4>
+        <div class="card-body">
+
+            <!--Title-->
+            {{!-- <h4 class="card-title">User Management</h4> --}}
+            <!--Text-->
+            <p class="card-text">Manage all payments</p>
+            <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+            <div class="btn-group dropup">
+                <button type="button" class="btn btn-sm btn-info">Dropup</button>
+                <button type="button" class="btn btn-sm btn-primary dropdown-toggle px-3" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Collect</a>
+                    <a class="dropdown-item" href="#">Review</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+            </div>
+
+        </div>
+        <h4 class="card-header blue-grey text-white">Users</h4>
+    </div>
+
+    <!-- Card -->
+
+
+
+
+    
+
+</div>
+<!-- Card deck -->
+

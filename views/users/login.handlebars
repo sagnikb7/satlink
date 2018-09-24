@@ -7,7 +7,7 @@
 
         <div class="card">
 
-            <h4 style="background: linear-gradient(to left, #00b4db, #0083b0);" class="card-header white-text  text-center py-3">Sign
+            <h4 style="background: linear-gradient(to left, #00b4db, #0083b0);" class="card-header white-text  text-center py-3"><i class="fas fa-lock"></i>&nbsp;Sign
                 In</h4>
             <div class="card-body">
                 <form action="/users/login" method="POST">
@@ -20,7 +20,7 @@
                     <!-- Password -->
                     <div class="form-group">
 
-                        <input type="password" name='password' id="defaultPassword" class="form-control" placeholder="Password" required>
+                        <input type="password" name='password' id="defaultPassword" class="form-control" placeholder="Password" pattern=".{8,}" required>
                     </div>
 
 

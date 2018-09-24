@@ -82,8 +82,9 @@ app.get('/contact-us', (req, res) => {
 
 //ROUTES
 const userRoutes = require('./routes/users');
-
+const adminRoutes = require('./routes/admin');
 app.use('/users', userRoutes);
+app.use('/admin',adminRoutes);
 
 //SERVER
 app.listen(port, () => {

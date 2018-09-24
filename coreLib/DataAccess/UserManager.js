@@ -13,7 +13,14 @@ class UserManage {
 
     //methods
 
-    addUser() {
+    addUser(user) {
+
+        const newUser = new this.User(user);
+        newUser.save().then(()=>{
+           return true;
+        }).catch((err)=>{
+            return false;
+        });
 
     }
     updateUser() {

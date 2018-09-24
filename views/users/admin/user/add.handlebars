@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-lg-6 col-md-8 mx-auto mt-2">
+        <!-- Default form subscription -->
+
+        <!-- Default form subscription -->
+
+    </div>
+</div>
+
+
+
+<!-- Default form login -->
+
+
+
+<div class="row">
+    <div class="col-lg-6 col-md-8 mx-auto mt-4">
+
+        <div class="card">
+
+            <h4 style="background: linear-gradient(to right, #43cea2, #185a9d);" class="card-header white-text  text-center py-3"><i
+                    class="fas fa-address-card"></i>&nbsp;Add User</h4>
+            <div class="card-body">
+                <p class="card-text">Fill up some basic info to create a user. Password should be minimum 8 characters long</p>
+
+                <form method="POST" action="/admin/user/add" class="text-left">
+
+
+
+
+
+                    <div class="form-group">
+                        <label for="select1">Select Role</label>
+                        <select name='role' id='select1' class='form-control' required>
+                            <option value="collector">Collector</option>
+                        </select>
+                    </div>
+                    <hr class='mb-4 mt-2'>
+                    <input type="text" name="username" class="form-control mb-4" placeholder="Username" required>
+
+
+                    <div class="form-group">
+                        <input type="password" name='password' id="Password1" class="form-control mb-4" placeholder="Enter Password"
+                            pattern=".{8,}" required>
+
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" name='password2' id="Password2" class="form-control mb-4" placeholder="Confirm Password"
+                            pattern=".{8,}" required>
+
+                    </div>
+
+                    <!-- Sign in button -->
+                    <button class="btn btn-default btn-block" type="submit">SUBMIT</button>
+
+
+                </form>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<!-- Default form login -->

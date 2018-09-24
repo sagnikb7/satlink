@@ -15,6 +15,8 @@
     <link href="/css/mdb.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="/css/style.css" rel="stylesheet">
+    <!--web manifest-->
+    <link rel="manifest" href="/manifest.json" />
 </head>
 
 <body style="background:#eeeeee">
@@ -22,6 +24,7 @@
 
     <div class="container">
         {{> _alerts }}
+        {{> _formValidationAlerts }}
         {{{body}}}
     </div>
 
