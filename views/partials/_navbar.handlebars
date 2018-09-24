@@ -1,5 +1,57 @@
+{{#if user}}
+<!--Navbar for logged in -->
+<nav class="navbar navbar-expand-sm navbar-dark mb-2  light-blue darken-3">
+    <div class="container">
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/"><b>SatLink</b></a>
 
-<!--Navbar-->
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+            aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/dashboard"><i class="fas fa-columns"></i>&nbsp;Dashboard
+                    </a>
+                </li>
+
+
+            </ul>
+            <!-- Links -->
+
+            <ul class="navbar-nav ml-auto">
+             
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-circle"></i>&nbsp; Profile</a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">My Profile</a>
+                    <a class="dropdown-item" href="/users/logout">Log out</a>
+        
+                </div>
+            </li>
+
+
+
+
+            </ul>
+        </div>
+        <!-- Collapsible content -->
+
+    </div>
+
+
+</nav>
+<!--/.Navbar-->
+
+{{else}}
+
+<!--Navbar for not logged in-->
 <nav class="navbar navbar-expand-sm navbar-dark mb-2  blue-grey darken-3">
     <div class="container">
         <!-- Navbar brand -->
@@ -34,7 +86,7 @@
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/users/login">Log in
+                    <a class="nav-link" href="/users/login"><i class="fas fa-sign-in-alt"></i>&nbsp; Log in
                     </a>
                 </li>
 
@@ -50,3 +102,5 @@
 
 </nav>
 <!--/.Navbar-->
+
+{{/if}}

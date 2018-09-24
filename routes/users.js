@@ -4,15 +4,22 @@ const router = express.Router();
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 
+//HELPER
+
+const {
+    ensureAuthenticatedAdmin,
+    ensureNonAuthenticated,
+    ensureAuthenticated
+} = require('../helpers/auth');
 require('../models/users');
 const Users = mongoose.model('users');
 
-router.get('/login', (req, res) => {
+router.get('/login', ensureNonAuthenticated, (req, res) => {
     res.render('users/login');
 });
 
 
-router.post('/login', (req, res, next) => {
+router.post('/login', ensureNonAuthenticated, (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/users/dashboard',
         failureRedirect: "/users/login",
@@ -20,11 +27,17 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
-router.get('/dashboard', (req, res) => {
-    res.render('users/dashboard');
+router.get('/dashboard', ensureAuthenticated, (req, res) => {
+    if (req.user.role == 'admin') {
+        res.render('users/admin/dashboard');
+    }
+    if (req.user.role == 'collector') {
+        res.render('users/collector/dashboard');
+    }
+
 });
 
-router.get('/logout', (req, res) => {
+router.get('/logout', ensureAuthenticated, (req, res) => {
     req.logout();
     req.flash('Success msg', "You are now logged out.");
     res.redirect('/users/login');

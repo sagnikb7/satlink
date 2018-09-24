@@ -60,6 +60,7 @@ UserManagerObj.login(passport);
 
 //GLOBAL variables MIDDLEWARE
 app.use((req, res, next) => {
+    res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
     res.locals.success_msg = req.flash('Success msg');
     res.locals.error_msg = req.flash('Error msg');
     // req.locals.error = req.flash('error') || null;
