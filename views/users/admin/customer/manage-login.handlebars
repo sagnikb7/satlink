@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-lg-6 col-md-8 mx-auto mt-2">
+        <!-- Default form subscription -->
+
+        <!-- Default form subscription -->
+
+    </div>
+</div>
+
+
+
+<!-- Default form login -->
+
+
+
+<div class="row">
+    <div class="col-lg-6 col-md-8 mx-auto mt-4">
+
+        <div class="card">
+
+            <h4 style=" background: linear-gradient(to right, #654ea3, #eaafc8);" class="card-header white-text  text-center py-3"><i
+                    class="fas fa-user-shield"></i>&nbsp;Change Customer Login</h4>
+            <div class="card-body">
+                <p class="card-text">Manage the Customer account login from here <b class='amber-text'>Password
+                        should be minimum 8 characters long</b></p>
+
+                <form method="POST" action="/admin/customer/manage-login" class="text-left">
+
+
+
+
+                    <div class="form-group">
+                        <label for="password">New Password</label>
+                        <input class="form-control" type="password" name="password" id="password" maxlength="32" pattern=".{8,}" required>
+                    </div>
+
+                   <div class="form-group">
+                        <label for="password2">Confirm New Password</label>
+                        <input class="form-control" type="password" name="password2" id="password2" maxlength="32" pattern=".{8,}" required>
+                    </div>
+
+
+                    
+
+                    <!-- Sign in button -->
+                    <button class="btn btn-info btn-block" type="submit">UPDATE</button>
+
+
+                </form>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<!-- Default form login -->

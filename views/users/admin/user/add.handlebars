@@ -18,10 +18,10 @@
 
         <div class="card">
 
-            <h4 style="background: linear-gradient(to right, #43cea2, #185a9d);" class="card-header white-text  text-center py-3"><i
+            <h4 style=" background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);" class="card-header white-text  text-center py-3"><i
                     class="fas fa-address-card"></i>&nbsp;Add User</h4>
             <div class="card-body">
-                <p class="card-text">Fill up some basic info to create a user. Password should be minimum 8 characters long</p>
+                <p class="card-text">Fill up some basic info to create a user. <b class='amber-text'>Password should be minimum 8 characters long</b></p>
 
                 <form method="POST" action="/admin/user/add" class="text-left">
 
@@ -36,7 +36,7 @@
                         </select>
                     </div>
                     <hr class='mb-4 mt-2'>
-                    <input type="text" name="username" class="form-control mb-4" placeholder="Username" required>
+                    <input type="text" name="username" class="form-control mb-4" placeholder="Username" maxlength=30 required>
 
 
                     <div class="form-group">

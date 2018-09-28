@@ -1,8 +1,15 @@
+//sample path = 'localhost/users'
+
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
+
+//UI Elements
+
+const adminDashboardUiElements = require('../models_UI/admin/dashboard');
+const customerDashboardUiElements = require('../models_UI/customer/dashboard');
 
 //HELPER
 
@@ -29,10 +36,17 @@ router.post('/login', ensureNonAuthenticated, (req, res, next) => {
 
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
     if (req.user.role == 'admin') {
-        res.render('users/admin/dashboard');
+        res.render('users/admin/dashboard', {
+            uiElement: adminDashboardUiElements
+        });
     }
     if (req.user.role == 'collector') {
         res.render('users/collector/dashboard');
+    }
+    if (req.user.role == 'customer') {
+        res.render('users/customer/dashboard', {
+            uiElement: customerDashboardUiElements
+        });
     }
 
 });

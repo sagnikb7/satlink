@@ -1,11 +1,10 @@
-<!--admin dashboard -->
+<!--customer dashboard -->
 
 <div class="row mb-4 ml-2 mt-1">
 
-    <h4> <b>Welcome: </b> &nbsp; {{user.userName}}<span class="badge badge-pill pink">{{user.role}}</span></h4>
+    <h4> <b>Welcome: </b> &nbsp; {{user.userName}}<span class="badge badge-pill blue">{{user.role}}</span></h4>
 
 </div>
-
 
 <div class='row'>
     {{#each uiElement}}
@@ -15,7 +14,7 @@
             <div class="card-body">
                 <p class="card-text">{{body.text}}</p>
 
-                <button type="button" class="btn blue lighten-2"><i class="fas fa-file-alt"></i></button>
+                {{!-- <button type="button" class="btn blue lighten-2"><i class="fas fa-file-alt"></i></button> --}}
 
                 <!-- Basic dropdown -->
                 <div class="btn-group">

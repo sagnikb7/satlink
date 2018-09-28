@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     userName: {
         type: String,
+        unique:true,
         required: true
     },
     password: {
@@ -18,6 +19,10 @@ const UserSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
+    },
+    status:{
+        type:String,
+        default:'active'
     }
 
 });

@@ -13,31 +13,49 @@ class UserManage {
 
     //methods
 
-    addUser(user) {
+    addUser(user, callback) {
 
         const newUser = new this.User(user);
-        newUser.save().then(()=>{
-           return true;
-        }).catch((err)=>{
-            return false;
+        newUser.save().then(() => {
+            return callback(true);
+        }).catch((err) => {
+            return callback(false);
         });
 
     }
-    updateUser() {
-
+    updateUser(userId,userUpdated,callback) {
+        this.User.findById(userId).then((user)=>{
+            user.password = userUpdated.password;
+            user.save().then(()=>{return callback(true);}).catch((err)=>{
+                return callback(false);
+            });
+        })
     }
-    deleteUser() {
-
+    softDeleteUser(userId, callback) {
+        this.User.findById(userId).then((user) => {
+            user.status = 'deactive';
+            user.save().then(() => {
+                return callback(true);
+            }).catch((err) => {
+                return callback(false);
+            });
+        })
     }
-    readUser() {
-
+    readUser(username, callback) {
+        this.User.findOne({
+            userName: username
+        }).then((user) => {
+            return callback(user);
+        }).catch((err) => {
+            return callback(false);
+        });
     }
     login(passport) {
         passport.use(new this.LocalStrategy({
             usernameField: 'username',
             passwordField: 'password',
-            passReqToCallback:true
-        }, (req,username, password, done) => {
+            passReqToCallback: true
+        }, (req, username, password, done) => {
             this.User.findOne({
                 userName: username
             }).then((user) => {
@@ -50,14 +68,14 @@ class UserManage {
                             return done(null, user);
                         } else {
                             // console.log('Login Error wrong password');
-                            return done(null, false, req.flash('Error msg',"Incorrect Password"));
+                            return done(null, false, req.flash('Error msg', "Incorrect Password"));
 
                         }
                     })
 
                 } else {
                     // console.log('Login Error user does not exist');
-                    return done(null, false,req.flash('Error msg',"User does not exist"));
+                    return done(null, false, req.flash('Error msg', "User does not exist"));
 
                 }
             })
