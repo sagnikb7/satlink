@@ -62,8 +62,8 @@ router.get('/logout', ensureAuthenticated, (req, res) => {
 // router.get('/create', (req, res) => {
 
 //     const newUser = new Users({
-//         userName: 'Apurba',
-//         password: 'Kolkata@1995',
+//         userName: "",
+//         password: "",
 //         role: 'admin'
 //     });
 
