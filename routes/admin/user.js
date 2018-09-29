@@ -55,7 +55,7 @@ router.get('/add', ensureAuthenticatedAdmin, (req, res) => {
 router.post('/add', ensureAuthenticatedAdmin, [
     check('role').isIn(['collector']),
 
-    check('username').not().isEmpty().custom((value) => {
+    check('username').not().isEmpty().isAlphanumeric().custom((value) => {
         return userModel.findOne({
             userName: value
         }).then((user) => {

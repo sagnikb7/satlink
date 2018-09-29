@@ -7,6 +7,14 @@ module.exports = {
             res.redirect('/users/dashboard');
         }
     },
+    ensureAuthenticatedCollector: function (req, res, next) {
+        if (req.isAuthenticated() && req.user.role == 'collector') {
+            return next();
+        } else {
+            req.flash('Error msg', 'Dont get lost!');
+            res.redirect('/users/dashboard');
+        }
+    },
     ensureNonAuthenticated: function (req, res, next) {
         if (req.isAuthenticated()) {
             res.redirect('/');

@@ -20,9 +20,23 @@ var uiElements = [{
             title: 'Add',
             link: '/admin/user/add'
         }, {
-            title:'Manage',
-            link:'/admin/user/manage'
-        }]
+            title: 'Manage',
+            link: '/admin/user/manage'
+        }],
+        badges: {
+            badge1: {
+                icon: '',
+                data: ''
+            },
+            badge2: {
+                icon: '',
+                data: ''
+            },
+            badge3: {
+                icon: '',
+                data: ''
+            }
+        }
 
     },
     {
@@ -42,13 +56,33 @@ var uiElements = [{
             bgColor: 'purple lighten-4',
             textColor: 'text-black',
 
-        }, dropdown: [{
-            title: 'Add',
-            link: '/admin/customer/add'
-        },{
-            title: 'Manage Login',
-            link: '/admin/customer/manage-login'
-        }]
+        },
+        dropdown: [{
+                title: 'Add',
+                link: '/admin/customer/add'
+            }, {
+                title: 'Manage',
+                link: ''
+            },
+            {
+                title: 'Change Login',
+                link: '/admin/customer/manage-login'
+            }
+        ],
+        badges: {
+            badge1: {
+                icon: '',
+                data: ''
+            },
+            badge2: {
+                icon: '',
+                data: ''
+            },
+            badge3: {
+                icon: '',
+                data: ''
+            }
+        }
 
 
     },
@@ -69,6 +103,27 @@ var uiElements = [{
             bgColor: 'orange lighten-4',
             textColor: 'text-black',
 
+        },
+        dropdown: [{
+            title: 'link',
+            link: ''
+        }, {
+            title: 'link 2',
+            link: ''
+        }],
+        badges: {
+            badge1: {
+                icon: '',
+                data: ''
+            },
+            badge2: {
+                icon: '',
+                data: ''
+            },
+            badge3: {
+                icon: '',
+                data: ''
+            }
         }
 
     }

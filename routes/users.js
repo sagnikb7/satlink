@@ -9,9 +9,15 @@ const bcrypt = require('bcryptjs');
 //UI Elements
 
 const adminDashboardUiElements = require('../models_UI/admin/dashboard');
+const collectorDashboardUiElements = require('../models_UI/collector/dashboard');
 const customerDashboardUiElements = require('../models_UI/customer/dashboard');
 
+
 //HELPER
+const {
+    userCardBadges,
+    customerCardBadges
+} = require('../helpers/badgesAdmin');
 
 const {
     ensureAuthenticatedAdmin,
@@ -36,12 +42,40 @@ router.post('/login', ensureNonAuthenticated, (req, res, next) => {
 
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
     if (req.user.role == 'admin') {
-        res.render('users/admin/dashboard', {
-            uiElement: adminDashboardUiElements
+        userCardBadges((Elements) => {
+            if (Elements) {
+                adminDashboardUiElements[0].badges.badge1.icon = Elements.badge1.icon;
+                adminDashboardUiElements[0].badges.badge1.data = Elements.badge1.data;
+
+
+                customerCardBadges((Elements) => {
+
+                    if (Elements) {
+                        adminDashboardUiElements[1].badges.badge1.icon = Elements.badge1.icon;
+                        adminDashboardUiElements[1].badges.badge1.data = Elements.badge1.data;
+                        adminDashboardUiElements[1].badges.badge2.icon = Elements.badge2.icon;
+                        adminDashboardUiElements[1].badges.badge2.data = Elements.badge2.data;
+                    }
+
+
+
+                });
+
+                //render
+                res.render('users/admin/dashboard', {
+                    uiElement: adminDashboardUiElements,
+                });
+
+            } else {
+                console.log('RENDER ERROR');
+            }
         });
+
     }
     if (req.user.role == 'collector') {
-        res.render('users/collector/dashboard');
+        res.render('users/collector/dashboard', {
+            uiElement: collectorDashboardUiElements
+        });
     }
     if (req.user.role == 'customer') {
         res.render('users/customer/dashboard', {

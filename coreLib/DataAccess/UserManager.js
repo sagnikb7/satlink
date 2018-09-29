@@ -57,7 +57,7 @@ class UserManage {
             passReqToCallback: true
         }, (req, username, password, done) => {
             this.User.findOne({
-                userName: username
+                userName: username,status:'active'
             }).then((user) => {
                 if (user) {
 

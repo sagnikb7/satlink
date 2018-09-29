@@ -5,6 +5,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 const userManager = require('../../coreLib/DataAccess/UserManager');
+const customerManager = require('../../coreLib/DataAccess/CustomerManager');
 
 const {
     check,
@@ -13,7 +14,10 @@ const {
 
 //mongoose model
 require('../../models/users');
+require('../../models/customer');
+
 const userModel = mongoose.model('users');
+const customerModel = mongoose.model('customer');
 
 //form check parameters
 const minPasswordLength = 8;
@@ -32,6 +36,55 @@ const {
 //routes
 router.get('/add', ensureAuthenticatedAdmin, (req, res) => {
     res.render('users/admin/customer/add');
+});
+
+//add customer
+router.post('/add', ensureAuthenticatedAdmin, [
+    check('stb_no').not().isEmpty().isAlphanumeric(),
+    check('vc_no').not().isEmpty().isNumeric(),
+    check('name').not().isEmpty(),
+    check('contact').isNumeric().custom((value) => {
+        if (value.length == 10) {
+            return true;
+        } else {
+            throw new Error('Contact number must be 10 digits');
+        }
+    })
+], (req, res) => {
+
+    const formErrors = validationResult(req);
+
+    if (!formErrors.isEmpty()) {
+        res.render('users/admin/customer/add', {
+            formErrors: formErrors.array()
+        });
+    } else {
+
+        var customerObj = new customerManager(customerModel);
+
+        var newCustomer = {
+            stb_no: req.body.stb_no,
+            vc_no: req.body.vc_no,
+            name: req.body.name,
+            contact_no: req.body.contact
+        }
+
+
+        customerObj.addCustomer(newCustomer, (status) => {
+            if (status) {
+                req.flash('Success msg', "Customer details added, CABLE CARD No : " + status);
+                res.redirect('/users/dashboard');
+
+            } else {
+                req.flash('Error msg', "A Customer with same STB or VC number exists");
+                res.redirect('/admin/customer/add');
+            }
+        })
+
+    }
+
+
+
 });
 
 router.get('/manage-login', ensureAuthenticatedAdmin, (req, res) => {
@@ -55,7 +108,7 @@ router.post('/manage-login', ensureAuthenticatedAdmin, [
 
     const formErrors = validationResult(req);
     if (!formErrors.isEmpty()) {
-        console.log(formErrors.array());
+        // console.log(formErrors.array());
         res.render('users/admin/customer/manage-login', {
             formErrors: formErrors.array()
         });

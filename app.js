@@ -7,7 +7,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const app = express();
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 //DB
 const db = require('./config/database');
@@ -83,9 +83,17 @@ app.get('/contact-us', (req, res) => {
 //ROUTES
 const userRoutes = require('./routes/users');
 const adminRoutes = require('./routes/admin');
+const collectorRoutes = require('./routes/collector');
+
 app.use('/users', userRoutes);
 app.use('/admin',adminRoutes);
+app.use('/collector',collectorRoutes);
 
+
+//The 404 Route (ALWAYS Keep this as the last route)
+app.get('*', function(req, res){
+    res.status(400).render('404');
+  });
 //SERVER
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
