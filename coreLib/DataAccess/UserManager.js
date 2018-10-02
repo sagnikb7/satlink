@@ -12,7 +12,7 @@ class UserManage {
 
 
     //methods
-
+    //--------------------------------------------------------ADD USER
     addUser(user, callback) {
 
         const newUser = new this.User(user);
@@ -23,10 +23,12 @@ class UserManage {
         });
 
     }
-    updateUser(userId,userUpdated,callback) {
-        this.User.findById(userId).then((user)=>{
+    updateUser(userId, userUpdated, callback) {
+        this.User.findById(userId).then((user) => {
             user.password = userUpdated.password;
-            user.save().then(()=>{return callback(true);}).catch((err)=>{
+            user.save().then(() => {
+                return callback(true);
+            }).catch((err) => {
                 return callback(false);
             });
         })
@@ -41,15 +43,25 @@ class UserManage {
             });
         })
     }
-    readUser(username, callback) {
-        this.User.findOne({
-            userName: username
-        }).then((user) => {
+    //-----------------------------------------------------------READ USER
+    readUser(userId, callback) {
+        this.User.findById(userId).then((user) => {
             return callback(user);
         }).catch((err) => {
             return callback(false);
         });
     }
+
+    readAllByRole(role, callback) {
+        this.User.find({
+            role: role
+        }).then((user) => {
+            return callback(user);
+        }).catch((err) => {
+            return callback(false);
+        })
+    }
+    //----------------------------------------------------------LOGIN
     login(passport) {
         passport.use(new this.LocalStrategy({
             usernameField: 'username',
@@ -57,7 +69,8 @@ class UserManage {
             passReqToCallback: true
         }, (req, username, password, done) => {
             this.User.findOne({
-                userName: username,status:'active'
+                userName: username,
+                status: 'active'
             }).then((user) => {
                 if (user) {
 

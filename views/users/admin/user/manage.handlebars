@@ -1,9 +1,19 @@
+<style>
+  .active{
+
+  background:#00C851;
+  }
+  .deactive{
+
+  }
+</style>
+
 {{!-- <form class="form-inline">
-    <div class="form-group mb-2">
-<input class="form-control" type="text" placeholder="Search" aria-label="Search" required>
-    </div>
-    
-   <button class="btn btn-default btn-md mb-3" type="submit"><i class="fa fa-search"></i></button>
+  <div class="form-group mb-2">
+    <input class="form-control" type="text" placeholder="Search" aria-label="Search" required>
+  </div>
+
+  <button class="btn btn-default btn-md mb-3" type="submit"><i class="fa fa-search"></i></button>
 </form> --}}
 
 
@@ -18,20 +28,14 @@
     </tr>
   </thead>
   <tbody>
+    {{#each users}}
     <tr>
-      <td>Sagnik</td>
-      <td>Collector</td>
-      <td>Active</td>
-      <td><a class='btn btn-md btn-outline-primary' href=""><i class="fas fa-user-edit"></i></a></td>
+      <td> <b>{{userName}}</b></td>
+      <td> {{role}}</td>
+      <td> {{status}}</td>
+      <td><a class='btn btn-md btn-outline-primary' href="/admin/user/manage/{{_id}}"><i class="fas fa-user-edit"></i></a></td>
 
     </tr>
-    <tr>
-      <td>Sagnik</td>
-      <td>Collector</td>
-      <td>Active</td>
-      <td><a href=""><i class="fas fa-user-edit"></i></a></td>
-
-    </tr>
+    {{/each}}
   </tbody>
 </table>
-

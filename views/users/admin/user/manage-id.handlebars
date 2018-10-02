@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="col-lg-4 col-md-6 mx-auto mt-2">
+        <!-- Default form subscription -->
+
+        <!-- Default form subscription -->
+
+    </div>
+</div>
+
+
+
+<!-- Default form login -->
+
+
+
+<div class="row">
+    <div class="col-lg-6 col-md-8 mx-auto mt-4">
+
+        <div class="card">
+
+            <h4 style="background: linear-gradient(to right, #00f260, #0575e6);" class="card-header white-text  text-center py-3"><i
+                    class="fas fa-user-edit"></i>&nbsp;Update User</h4>
+            <div class="card-body">
+                <p class="card-text">You can update the user password or activate/deactivate a user. <b class='amber-text'>Password
+                        should
+                        be minimum 8 characters long</b></p>
+
+                <p>Selected User : <b>{{user.userName}}</b></p>
+                <!-- Button trigger modal -->
+                <div class="mt-4">
+                    <button type="button" class="btn btn-block orange lighten-1 waves-effect" data-toggle="modal"
+                        data-target="#changePwdModal">
+                        Change Password
+                    </button>
+                    <button type="button" class="btn btn-block red lighten-2 waves-effect" data-toggle="modal"
+                        data-target="#deactivateAccountModal">
+                        Deactivate Account
+                    </button>
+                </div>
+
+                <!-- Modal  password change-->
+                <div class="modal fade" id="changePwdModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div style="background: linear-gradient(to right, #f46b45, #eea849);" class="lighten-1 modal-header">
+                                <h5 class="text-white font-weight-bold modal-title" id="exampleModalLabel">Change
+                                    Password</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" action="" class="text-left">
+
+
+ <p class="card-text">Manage the User account login from here <b class='amber-text'>Password
+                        should be minimum 8 characters long</b></p>
+
+                                    <div class="form-group">
+                                        <input type="password" name='password' id="Password1" class="form-control mb-4"
+                                            placeholder="New Password" pattern=".{8,}" required>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="password" name='password2' id="Password2" class="form-control mb-4"
+                                            placeholder="Confirm New Password" pattern=".{8,}" required>
+
+                                    </div>
+
+                                    <!-- Sign in button -->
+                                    <button class="btn btn-default btn-block" type="submit">SUBMIT</button>
+
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<!-- Default form login -->

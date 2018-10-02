@@ -29,21 +29,36 @@ require('../../models/users');
 const userModel = mongoose.model('users');
 
 //user manage view
-router.get('/manage',ensureAuthenticatedAdmin,(req,res)=>{
-res.render('users/admin/user/manage');
-});
-//user manage post
-router.post('/manage',ensureAuthenticatedAdmin,(req,res)=>{
+router.get('/manage', ensureAuthenticatedAdmin, (req, res) => {
     var userManagerObj = new userManager(userModel);
-    userManagerObj.readUser(req.body.searchTerm,(data)=>{
-        if(data){
-            res.send(data);
-        }else{
-            req.flash('Error msg','User not found!');
-            res.redirect('/admin/user/manage');
+    userManagerObj.readAllByRole('collector', status => {
+        if (status) {
+            res.render('users/admin/user/manage', {
+                users: status
+            });
+        } else {
+            console.log("Error");
         }
-    })
     });
+
+});
+
+
+///user manage (update) view
+router.get('/manage/:id', ensureAuthenticatedAdmin, (req, res) => {
+    // res.send(req.params.id);
+    var userManagerObj = new userManager(userModel);
+    userManagerObj.readUser(req.params.id, (status) => {
+        if (status) {
+            // console.log(status);
+            res.render('users/admin/user/manage-id',{user:status});
+        } else {
+           res.redirect('/');
+        }
+    });
+
+    
+})
 
 
 //user add view
