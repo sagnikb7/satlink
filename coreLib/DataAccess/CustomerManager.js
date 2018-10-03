@@ -30,8 +30,8 @@ class CustomerManage {
                 //add cable card number 
                 this.Customer.countDocuments({}).then((result) => {
 
-                    var Id = parseInt(result,10)+1
-                    var cableCardNo = 'S'+Id;
+                    var Id = parseInt(result, 10) + 1
+                    var cableCardNo = 'S' + Id;
                     newCust.cable_card_no = cableCardNo;
 
                     newCust.save().then(() => {
@@ -48,7 +48,26 @@ class CustomerManage {
         })
 
 
-    }
+    };
+
+    fetchCustomer(cable_card_no, callback) {
+
+        this.Customer.findOne({
+            cable_card_no: cable_card_no
+        }).where('status').equals('active').then((Customer) => {
+            if (Customer) {
+
+                return callback(Customer);
+
+            } else {
+                return callback(false);
+            }
+
+        }).catch((err) => {
+            console.log("Customer fetch error");
+        })
+
+    };
 
 }
 

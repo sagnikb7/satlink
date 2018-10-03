@@ -1,8 +1,64 @@
-<p>Enter <b>Cable Card number</b>  of customer to search a customer and record a payment.</p>
-<form class="form-inline">
+<p>Enter <b>Cable Card number</b> of customer to search a customer and record a payment.</p>
+<form method="POST" action="/collector/payment/collect" class="form-inline">
     <div class="form-group mb-2">
-<input class="form-control" type="text" placeholder="Search" aria-label="Search" required>
+        <input class="form-control" type="text" name='search' placeholder="Search" aria-label="Search" required>
     </div>
-    
-   <button class="btn btn-default btn-md mb-3" type="submit"><i class="fa fa-search"></i></button>
+
+    <button class="btn btn-default btn-md mb-3" type="submit"><i class="fa fa-search"></i></button>
 </form>
+
+{{#if customer}}
+
+<div class="row">
+    <div class="col-lg-4 col-md-12 mb-4">
+
+
+        <!--Card-->
+        <div class="card card-cascade wider mb-4">
+
+            <!--Card image-->
+            <div class="view view-cascade">
+                {{!-- <img src="https://mdbootstrap.com/img/Photos/Horizontal/People/6-col/img%20%283%29.jpg" class="card-img-top">
+                --}}
+                <a href="#!">
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+            <!--/Card image-->
+
+            <!--Card content-->
+            <div class="card-body card-body-cascade text-center">
+                <div class="row">
+                    <div class="col-4 text-left">
+                        <h2> <span class="p-3 indigo darken-1 badge">{{customer.cable_card_no}}&nbsp;</span>
+                        </h2>
+                    </div>
+                    <div class="col-8 text-right">
+                        <h5 class="card-title"><strong>{{customer.name}}</strong></h5>
+                        <p class="badge p-2 badge-info"><strong>Customer</strong></p>
+                    </div>
+                </div>
+                <!--Title-->
+
+
+
+                <p class="p-0 m-0 card-text text-left"><strong>STB :</strong>{{customer.stb_no}}</p>
+                <p class="p-0 m-0 card-text text-left"><strong>VC :</strong>{{customer.vc_no}}</p>
+                <p class="card-text text-left"><strong>Contact :</strong>{{customer.contact_no}}</p>
+                {{!-- <p class="card-text text-left"><strong>Date :</strong>{{customer.date}}</p> --}}
+
+                <button style="//border-radius: 40px; background:  linear-gradient(to right, #11998e, #38ef7d); " class="mt-5 mb-3 btn btn-info font-weight-bold btn-block"><i class="fas fa-rupee-sign"></i> &nbsp;&nbsp;&nbsp; proceed to payment</button>
+            </div>
+            <!--/.Card content-->
+
+        </div>
+        <!--/.Card-->
+
+    </div>
+
+</div>
+
+{{/if}}
+
+
+</div>
