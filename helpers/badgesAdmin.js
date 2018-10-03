@@ -23,17 +23,26 @@ module.exports = {
                 data: ''
             }
         };
+
         userModel.countDocuments({
             status: 'active',
             role: 'collector'
         }).then((count) => {
-            elementJSON.badge1.icon = "fas fa-user-check";
-            elementJSON.badge1.data = count;
-        }).then(() => {
-            return callback(elementJSON);
+            userModel.countDocuments({
+                status: 'deactive',
+                role: 'collector'
+            }).then((count1) => {
+                elementJSON.badge1.icon = "fas fa-user-check";
+                elementJSON.badge1.data = count;
+                elementJSON.badge2.icon = "fas fa-user-times";
+                elementJSON.badge2.data = count1;
+
+                return callback(elementJSON);
+            })
         }).catch((err) => {
             console.log(`ERROR: ${err}`);
         });
+
     },
 
     customerCardBadges: function (callback) { //ADMIN customer panel badges

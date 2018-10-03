@@ -4,7 +4,7 @@
   background:#00C851;
   }
   .deactive{
-
+  background:#ff4444;
   }
 </style>
 
@@ -32,10 +32,12 @@
     <tr>
       <td> <b>{{userName}}</b></td>
       <td> {{role}}</td>
-      <td> {{status}}</td>
+      <td> <span class="badge badge-pill {{status}}">{{status}}</span></td>
       <td><a class='btn btn-md btn-outline-primary' href="/admin/user/manage/{{_id}}"><i class="fas fa-user-edit"></i></a></td>
 
     </tr>
+    {{else}}
+    <h3>It's a bit lonely here....</h3>
     {{/each}}
   </tbody>
 </table>

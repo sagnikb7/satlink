@@ -33,6 +33,18 @@ class UserManage {
             });
         })
     }
+
+    updateUserStatus(userId, userUpdated, callback) {
+        this.User.findById(userId).then((user) => {
+            user.status = userUpdated.status;
+            user.save().then(() => {
+                return callback(true);
+            }).catch((err) => {
+                return callback(false);
+            });
+        })
+    }
+
     softDeleteUser(userId, callback) {
         this.User.findById(userId).then((user) => {
             user.status = 'deactive';

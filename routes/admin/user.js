@@ -51,15 +51,87 @@ router.get('/manage/:id', ensureAuthenticatedAdmin, (req, res) => {
     userManagerObj.readUser(req.params.id, (status) => {
         if (status) {
             // console.log(status);
-            res.render('users/admin/user/manage-id',{user:status});
+            res.render('users/admin/user/manage-id', {
+                user: status
+            });
         } else {
-           res.redirect('/');
+            res.redirect('/');
         }
     });
 
-    
+
 })
 
+router.post('/manage/password-change/:id', ensureAuthenticatedAdmin, [check('password').isLength({
+        min: minPasswordLength
+    }),
+    check('password2').custom((value, {
+        req
+    }) => {
+        if (value !== req.body.password) {
+            throw new Error("Both passwords must match");
+        } else {
+            return true;
+        }
+    })
+], (req, res) => {
+    // res.send(req.body);
+    const formErrors = validationResult(req);
+    if (!formErrors.isEmpty()) {
+        req.flash('Error msg',"Both Passwords should match and should be atleast 8 characters long");
+        res.redirect('/admin/user/manage/'+req.params.id);
+    } else {
+        var hash = passwordHasher(req.body.password);
+        const updatedUser = {
+            password: hash
+        }
+        var userManagerObj = new userManager(userModel);
+       
+            userManagerObj.updateUser(req.params.id, updatedUser, (status) => {
+                if (status) {
+                    req.flash('Success msg', "User Account details updated");
+                    res.redirect('/admin/user/manage');
+                } else {
+                    req.flash('Error msg', "User Account details not updated");
+                    res.redirect('/admin/user/manage');
+
+                }
+            })
+    
+    }
+
+})
+//user deactivate account 
+
+router.post('/manage/deactivate-account/:id',ensureAuthenticatedAdmin,[
+    check('status').isIn(['active','deactive'])
+],(req,res)=>{
+
+    // res.send(req.body);
+    const formErrors = validationResult(req);
+    if (!formErrors.isEmpty()) {
+        req.flash('Error msg',"Form validation error");
+        res.redirect('/admin/user/manage/'+req.params.id);
+    
+    } else {
+        const updatedUser = {
+            status:req.body.status
+        }
+
+        var userManagerObj = new userManager(userModel);
+        userManagerObj.updateUserStatus(req.params.id,updatedUser,status=>{
+            if(status){
+                req.flash('Success msg', "Account Status updated");
+                    res.redirect('/admin/user/manage');
+
+            }else{
+                req.flash('Error msg', "There was an issue!");
+                    res.redirect('/admin/user/manage');
+
+            }
+        })
+    }
+})
 
 //user add view
 router.get('/add', ensureAuthenticatedAdmin, (req, res) => {

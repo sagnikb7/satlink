@@ -51,11 +51,11 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form method="POST" action="" class="text-left">
+                                <form method="POST" action="/admin/user/manage/password-change/{{user._id}}" class="text-left">
 
 
- <p class="card-text">Manage the User account login from here <b class='amber-text'>Password
-                        should be minimum 8 characters long</b></p>
+                                    <p class="card-text">Manage the User account login from here <b class='amber-text'>Password
+                                            should be minimum 8 characters long</b></p>
 
                                     <div class="form-group">
                                         <input type="password" name='password' id="Password1" class="form-control mb-4"
@@ -79,6 +79,45 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- -->
+
+
+                <!-- Modal  account deactivate-->
+                <div class="modal fade" id="deactivateAccountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div style="background: linear-gradient(to left, #ed213a, #93291e);" class="lighten-1 modal-header">
+                                <h5 class="text-white font-weight-bold modal-title" id="exampleModalLabel">Deactivate
+                                    Account</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="mb-4">Current Status: <span class="badge badge-info">{{user.status}}</span></p>
+                                <form action="/admin/user/manage/deactivate-account/{{user._id}}" method="POST">
+                                    <select name="status" class="form-control mb-3">
+                                        <option value="" disabled selected>Choose Status</option>
+                                        <option value="active">Activate</option>
+                                        <option value="deactive">Deactivate</option>
+                                        
+                                    </select>
+
+                                     <button class="btn btn-default btn-block" type="submit">SUBMIT</button>
+
+
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- -->
+
             </div>
         </div>
 

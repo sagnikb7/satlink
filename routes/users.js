@@ -46,6 +46,8 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => {
             if (Elements) {
                 adminDashboardUiElements[0].badges.badge1.icon = Elements.badge1.icon;
                 adminDashboardUiElements[0].badges.badge1.data = Elements.badge1.data;
+                adminDashboardUiElements[0].badges.badge2.icon = Elements.badge2.icon;
+                adminDashboardUiElements[0].badges.badge2.data = Elements.badge2.data;
 
 
                 customerCardBadges((Elements) => {
