@@ -47,19 +47,12 @@
                 <p class="card-text text-left"><strong>Contact :</strong>{{customer.contact_no}}</p>
                 {{!-- <p class="card-text text-left"><strong>Date :</strong>{{customer.date}}</p> --}}
 
-                <form action="" method="POST">
-                    <input type="hidden" name="customerID" value="{{customer.__id}}">
-                    <div class="form-group">
-                        <label for="datePick" class="text-warning"><strong>Payment Date</strong> mm-dd-yyyy</label>
-                        <input class="form-control" id="datePick" type="text" readonly="readonly" placeholder="Pick Date"
-                            required>
-                    </div>
 
-                    <button type="submit" style="//border-radius: 40px; background:  linear-gradient(to right, #11998e, #38ef7d); "
-                        class="mt-5 mb-3 btn btn-info font-weight-bold btn-block"><i class="fas fa-rupee-sign"></i>
-                        &nbsp;&nbsp;&nbsp; proceed to payment</button>
+                <!-- modal trigger-->
+                <button data-toggle="modal" data-target="#payment" style="background:  linear-gradient(to right, #11998e, #38ef7d); "
+                    class="mt-5 mb-3 btn btn-info font-weight-bold btn-block"><i class="fas fa-rupee-sign"></i>
+                    &nbsp;&nbsp;&nbsp; Record payment</button>
 
-                </form>
 
 
             </div>
@@ -67,6 +60,74 @@
 
         </div>
         <!--/.Card-->
+
+        <!-- Modal -->
+        <div class="modal fade" id="payment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div style="background: linear-gradient(to right, #11998e, #38ef7d);" class="modal-header">
+                        <h5 class="text-white modal-title" id="exampleModalLabel">Payment Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/collector/payment/confirm" method="POST">
+                            <input type="hidden" value="{{customer._id}}" name="customer_id">
+                            <div class="form-row mb-2">
+                                <div class="col">
+                                <label for="month">Payment Month</label>
+                                    <select class="form-control" name="month" id="month" required>
+                                        <option value="" disabled selected>Choose Month</option>
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+
+
+                                    </select>
+
+                                      
+
+
+                                </div>
+                                <div class="col">
+                                      <label for="year">Year</label>
+                                      <select class="form-control" name="year" id="year" required>
+                                        <option value="" disabled selected>Choose Year</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        
+                                  
+
+
+                                    </select>
+                                   
+                                </div>
+                            </div>
+
+                            <div>
+                                  <label for="amount">Amount</label>
+                                <input id="amount" name="amount" class='form-control' type="number" min='10' max="1000" required>
+                            </div>
+
+
+                            <button class="btn btn-primary btn-block mt-4" type="submit">Submit</button>
+                        </form>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
 
     </div>
 
@@ -76,4 +137,3 @@
 
 
 </div>
-
