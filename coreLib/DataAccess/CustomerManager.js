@@ -31,7 +31,7 @@ class CustomerManage {
                 this.Customer.countDocuments({}).then((result) => {
 
                     var Id = parseInt(result, 10) + 1
-                    var cableCardNo = 'S' + Id;
+                    var cableCardNo = 'C' + Id;
                     newCust.cable_card_no = cableCardNo;
 
                     newCust.save().then(() => {

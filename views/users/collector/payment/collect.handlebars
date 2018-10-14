@@ -27,7 +27,7 @@
             <!--/Card image-->
 
             <!--Card content-->
-            <div class="card-body card-body-cascade text-center">
+            <div class="card-body card-body-cascade text-left">
                 <div class="row">
                     <div class="col-4 text-left">
                         <h2> <span class="p-3 indigo darken-1 badge">{{customer.cable_card_no}}&nbsp;</span>
@@ -47,7 +47,21 @@
                 <p class="card-text text-left"><strong>Contact :</strong>{{customer.contact_no}}</p>
                 {{!-- <p class="card-text text-left"><strong>Date :</strong>{{customer.date}}</p> --}}
 
-                <button style="//border-radius: 40px; background:  linear-gradient(to right, #11998e, #38ef7d); " class="mt-5 mb-3 btn btn-info font-weight-bold btn-block"><i class="fas fa-rupee-sign"></i> &nbsp;&nbsp;&nbsp; proceed to payment</button>
+                <form action="" method="POST">
+                    <input type="hidden" name="customerID" value="{{customer.__id}}">
+                    <div class="form-group">
+                        <label for="datePick" class="text-warning"><strong>Payment Date</strong> mm-dd-yyyy</label>
+                        <input class="form-control" id="datePick" type="text" readonly="readonly" placeholder="Pick Date"
+                            required>
+                    </div>
+
+                    <button type="submit" style="//border-radius: 40px; background:  linear-gradient(to right, #11998e, #38ef7d); "
+                        class="mt-5 mb-3 btn btn-info font-weight-bold btn-block"><i class="fas fa-rupee-sign"></i>
+                        &nbsp;&nbsp;&nbsp; proceed to payment</button>
+
+                </form>
+
+
             </div>
             <!--/.Card content-->
 
@@ -62,3 +76,4 @@
 
 
 </div>
+

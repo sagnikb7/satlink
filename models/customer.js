@@ -9,7 +9,7 @@ const CustomerSchema = new Schema({
     },
     vc_no: {
         required: true,
-        type: Number
+        type: String
     },
     cable_card_no: {
 
