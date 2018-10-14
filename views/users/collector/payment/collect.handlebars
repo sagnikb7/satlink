@@ -53,6 +53,14 @@
                     class="mt-5 mb-3 btn btn-info font-weight-bold btn-block"><i class="fas fa-rupee-sign"></i>
                     &nbsp;&nbsp;&nbsp; Record payment</button>
 
+                <!-- Payment history button -->
+                <form action="/collector/payment/payment-history" method="POST">
+                    <button class="font-weight-bold btn btn-outline-primary btn-block"><i class="fas fa-history"></i>&nbsp;&nbsp;&nbsp;Payment
+                        History</button>
+                        <input type="hidden" value="{{customer._id}}" name="customerId">
+                </form>
+
+
 
 
             </div>
@@ -75,56 +83,22 @@
                     <div class="modal-body">
                         <form action="/collector/payment/confirm" method="POST">
                             <input type="hidden" value="{{customer._id}}" name="customer_id">
-                            <div class="form-row mb-2">
-                                <div class="col">
-                                <label for="month">Payment Month</label>
-                                    <select class="form-control" name="month" id="month" required>
-                                        <option value="" disabled selected>Choose Month</option>
-                                        <option value="1">January</option>
-                                        <option value="2">February</option>
-                                        <option value="3">March</option>
-                                        <option value="4">April</option>
-                                        <option value="5">May</option>
-                                        <option value="6">June</option>
-                                        <option value="7">July</option>
-                                        <option value="8">August</option>
-                                        <option value="9">September</option>
-                                        <option value="10">October</option>
-                                        <option value="11">November</option>
-                                        <option value="12">December</option>
 
-
-                                    </select>
-
-                                      
-
-
-                                </div>
-                                <div class="col">
-                                      <label for="year">Year</label>
-                                      <select class="form-control" name="year" id="year" required>
-                                        <option value="" disabled selected>Choose Year</option>
-                                        <option value="2018">2018</option>
-                                        <option value="2019">2019</option>
-                                        
-                                  
-
-
-                                    </select>
-                                   
-                                </div>
+                            <div> <label for="datePicker">Payment Date</label>
+                                <input name="datePicker" id="datePicker" class="form-control mb-2" type="text"
+                                    placeholder="Select Date.." readonly="readonly">
                             </div>
-
                             <div>
-                                  <label for="amount">Amount</label>
-                                <input id="amount" name="amount" class='form-control' type="number" min='10' max="1000" required>
+                                <label for="amount">Amount</label>
+                                <input id="amount" name="amount" class='form-control' type="number" min='10' max="1000"
+                                    required>
                             </div>
 
 
                             <button class="btn btn-primary btn-block mt-4" type="submit">Submit</button>
                         </form>
                     </div>
-                   
+
                 </div>
             </div>
         </div>
@@ -137,3 +111,14 @@
 
 
 </div>
+
+<!-- JS for datePicker ( flatpicker ) -->
+<script>
+    flatpickr("#datePicker", {
+        dateFormat: "m-Y",
+        disableMobile: true,
+        minDate: "today",
+        maxDate: new Date().fp_incr(100),
+        defaultDate: "today"
+    });
+</script>

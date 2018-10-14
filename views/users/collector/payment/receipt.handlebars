@@ -1,0 +1,34 @@
+
+<div class="row">
+    <div class="col-lg-6 col-md-8 mx-auto mt-4">
+
+        <div class="card">
+
+            <h4 style="background: linear-gradient(to right, #fc466b, #3f5efb);" class="card-header white-text  text-center py-4"><i
+                    class="fas fa-receipt"></i>&nbsp;Receipt</h4>
+            <div class="card-body">
+                <h3>Amount:&nbsp;&nbsp;<i class="fas fa-rupee-sign"></i> <b>{{payment.amount}}/-</b></h3>
+                <p>Payment Month: {{payment.payment_month}}-{{payment.payment_year}}</p>
+               
+                <div class="mx-auto mt-2" id="qrcode"></div>
+            </div>
+            <div class="card-footer">{{payment.date}}</div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+<script src="/js/qrcode.js"></script>
+<script>
+    var qrcode = new QRCode("qrcode", {
+        text: "{{payment._id}}",
+        width: 128,
+        height: 128,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+    });
+</script>

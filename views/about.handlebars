@@ -8,8 +8,14 @@
 
     <!--Text-->
     <div class="d-flex justify-content-center">
-        <p class="card-text mb-3" style="max-width: 43rem;">Use your credentials to Log In
+        {{#if user}}
+<p class="card-text mb-3" style="max-width: 43rem;">Head to Dashboard section to explore more
         </p>
+        {{else}}
+<p class="card-text mb-3" style="max-width: 43rem;">Use your credentials to Log In
+        </p>
+        {{/if}}
+        
     </div>
 
 

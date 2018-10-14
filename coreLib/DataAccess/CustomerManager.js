@@ -69,6 +69,19 @@ class CustomerManage {
 
     };
 
+    fetchCustomerById(customerId,callback){
+        this.Customer.findById(customerId).then((customer)=>{
+            if(customer){
+                return callback(customer);
+            }else{
+                return callback(false);
+            }
+
+        }).catch((err)=>{
+            console.log("Customer fetch error");
+        });
+    }
+
 }
 
 module.exports = CustomerManage;

@@ -21,7 +21,11 @@ var uiElements = [{
         link: '/collector/payment/collect'
     }, {
         title: 'Review',
-        link: ''
+        link: '/collector/payment/review'
+    },
+    {
+        title: 'Verify',
+        link: '/collector/payment/verify'
     }],
     badges: {
         badge1: {
