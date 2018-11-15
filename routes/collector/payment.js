@@ -12,9 +12,11 @@ const {
 //mongoose model 
 require("../../models/customer");
 require("../../models/payments");
+require("../../models/users");
 
 const CustomerModel = mongoose.model('customer');
 const PaymentModel = mongoose.model('payments');
+const UserModel = mongoose.model('users');
 //HELPER
 const {
     ensureAuthenticatedCollector,
@@ -52,7 +54,7 @@ router.post('/confirm', ensureAuthenticatedCollector, [
     check('amount').isNumeric({
         min: 10
     }),
-  
+
 ], (req, res) => {
 
     var dateArray = req.body.datePicker.split("-");
@@ -75,10 +77,10 @@ router.post('/confirm', ensureAuthenticatedCollector, [
         paymentObj.recordPayment(newPayment, (status) => {
             if (status.status == 'ERROR') {
                 // console.log(status);
-                req.flash("Error msg","Payment already collected from this customer, for the desired month. For further details review PAYMENT HISTORY.")
+                req.flash("Error msg", "Payment already collected from this customer, for the desired month. For further details review PAYMENT HISTORY.")
                 res.redirect("/collector/payment/collect");
             } else {
-                req.flash("Success msg","Payment Recorded Successfully.");
+                req.flash("Success msg", "Payment Recorded Successfully.");
                 res.redirect("/collector/payment/review");
             }
         });
@@ -89,49 +91,85 @@ router.post('/confirm', ensureAuthenticatedCollector, [
 
 })
 
-router.get('/review',ensureAuthenticatedCollector,(req,res)=>{
+router.get('/review', ensureAuthenticatedCollector, (req, res) => {
     var paymentObj = new PaymentManager(PaymentModel);
-    
+
     // showLoadingSymbol('#divId');
-    paymentObj.viewPaymentsByCollector(res.locals.user._id,(payments)=>{
-        if(payments){
-            payments.forEach((Element)=>{
-                var CustomerObj = new CustomerManager(CustomerModel);
-                CustomerObj.fetchCustomerById(Element.customer,(customer)=>{
+    paymentObj.viewPaymentsByCollector(res.locals.user._id, (payments) => {
+        if (payments) {
+            var promises = [];
+
+            payments.forEach((Element) => {
+                /*
+                var CustomerObj = new CustomerManager(CustomerModel);           
+                var promise = CustomerObj.fetchCustomerById(Element.customer,(customer)=>{
                     if(customer){
                         Element.customer = customer.name;
                     }
                     // if(counter == endoFLoop){
                     //     hideLoadingSymbol('#divId');
                     // }
+                });
+                */
+
+                var promise = CustomerModel.findById(Element.customer).then((customer) => {
+                    if (customer) {
+                        Element.customer = customer.name;
+                    }
                 })
 
+                promises.push(promise);
+
             })
-            res.render('users/collector/payment/review',{payments:payments});
-        }else{
-        res.send("Payment fetch error");
+            Promise.all(promises).then(() => {
+                res.render('users/collector/payment/review', {
+                    payments: payments
+                });
+            })
+
+        } else {
+            res.send("Payment fetch error");
         }
     })
-  
+
 })
-router.post('/reciept',ensureAuthenticatedCollector,(req,res)=>{
+router.post('/reciept', ensureAuthenticatedCollector, (req, res) => {
     var paymentObj = new PaymentManager(PaymentModel);
-    paymentObj.viewPaymentById(req.body.paymentId,(payment)=>{
-        if(payment){
-            res.render('users/collector/payment/receipt',{payment:payment});
-        }else{
+    paymentObj.viewPaymentById(req.body.paymentId, (payment) => {
+        if (payment) {
+            res.render('users/collector/payment/receipt', {
+                payment: payment
+            });
+        } else {
             res.send("Invalid Payment ID");
         }
     })
-   
+
 })
 
-router.post('/payment-history',ensureAuthenticatedCollector,(req,res)=>{
+router.post('/payment-history', ensureAuthenticatedCollector, (req, res) => {
     var paymentObj = new PaymentManager(PaymentModel);
-    paymentObj.viewPaymentsByCustomer(req.body.customerId,(payments)=>{
-        if(payments){
-            res.render('users/collector/payment/payment-history',{payments:payments});
-        }else{
+    
+    paymentObj.viewPaymentsByCustomer(req.body.customerId, (payments) => {
+        if (payments) {
+            
+            var promises = [];
+            payments.forEach((Element)=>{
+
+                var promise = UserModel.findById(Element.collected_by).then((user)=>{
+                    if(user){
+                        Element.collected_by = user.userName;
+                    }
+                });
+                promises.push(promise);
+            });
+            
+            Promise.all(promises).then(()=>{
+                res.render('users/collector/payment/payment-history', {
+                    payments: payments
+                });
+            });
+        } else {
             res.send("Payment fetch error");
         }
     })

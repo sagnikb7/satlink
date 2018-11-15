@@ -18,7 +18,15 @@
             <td><span class="d-inline-block text-truncate" style="max-width: 200px;">
                     {{date}}
                 </span></td>
-            <td><a href="" class="btn btn-sm btn-info"><i class="fas fa-info"></i></a></td>
+            <td>
+                  
+               <form action="/collector/payment/reciept" method="POST">
+                   <input type="hidden" value="{{_id}}" name="paymentId">
+                    <button class="btn btn-sm btn-primary" type="submit"><i class="fas fa-receipt"></i></button>
+               </form> 
+                {{!-- <a href="" class="btn btn-sm btn-info"><i class="fas fa-info"></i></a> --}}
+            
+            </td>
 
         </tr>
         {{else}}
