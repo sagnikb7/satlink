@@ -82,6 +82,16 @@ class CustomerManage {
         });
     }
 
+
+    getAllCustomer(page,callback){
+    this.Customer.paginate({},{sort:{date:-1},page:page,limit:25}).then(data=>{
+        return callback(data);
+    }).catch((err)=>{
+        return callback(false);
+    })
+    }
 }
+
+
 
 module.exports = CustomerManage;

@@ -136,4 +136,31 @@ router.post('/manage-login', ensureAuthenticatedAdmin, [
 
     }
 });
+
+router.get('/manage/:page', ensureAuthenticatedAdmin,(req,res)=>{
+  
+    var customerObj = new customerManager(customerModel);
+    customerObj.getAllCustomer(req.params.page,(data)=>{
+        if(data){
+
+            var pages = [];
+            for (i=1;i<=data.pages;i++){
+                if(i == req.params.page){
+                    pages.push({number:i,active:'active'});
+                }else{
+                    pages.push({number:i,active:''});
+                }
+               
+            }
+           
+            var records = data.docs;
+            var mainData = {pages:pages,records:records}
+            res.render('users/admin/customer/manage',{data:mainData});
+        }else{
+            console.log("No cutomer data");
+        }
+    })
+    
+   
+})
 module.exports = router;

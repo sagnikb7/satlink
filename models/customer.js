@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+const mongoosePaginate  = require('mongoose-paginate');
 const CustomerSchema = new Schema({
     stb_no: {
         required: true,
@@ -36,5 +36,7 @@ const CustomerSchema = new Schema({
         default: 'active'
     }
 });
+
+CustomerSchema.plugin(mongoosePaginate);
 
 mongoose.model('customer', CustomerSchema);

@@ -1,0 +1,118 @@
+<style>
+    span.active{
+
+  background:#00C851;
+  }
+  span.deactive{
+  background:#ff4444;
+  }
+</style>
+<div class="row">
+    <div class="col">
+        <p><b>Customer</b> management</p>
+    </div>
+    <div class="col">
+
+        <!-- Button trigger modal -->
+        <button style="width:40px; height:40px; margin:0px; padding:0px; border-radius: 20px" type="button" class="btn pink lighten-2 float-right"
+            data-toggle="modal" data-target="#basicExampleModal">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class=" blue darken-3 modal-header">
+                <h5 class="text-white font-weight-bold modal-title" id="exampleModalLabel">Customer Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="mt-2" action="" method="">
+
+                    <div class="form-group">
+                        <label for="searchBy">Search category:</label>
+                        <select class="form-control" name="searchBy" id="searchBy">
+                            <option value="">Cable Card</option>
+                            <option value="">Name</option>
+                            <option value="">Contact</option>
+                            <option value="">STB</option>
+                            <option value="">VC</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="searchString">Enter term:</label>
+                        <input class="form-control" type="text" maxlength="50" id="searchString" name="searchString"
+                            required>
+
+                    </div>
+
+                    <button class="btn btn-info" type="submit">Search</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<table class="table table-hover table-responsive">
+    <thead class="red lighten-3 white-text">
+        <tr>
+            <th>Details</th>
+            <th>Name</th>
+            <th>CC no.</th>
+            <th>Contact</th>
+            <th>Status</th>
+            <th>Manage</th>
+        </tr>
+
+    </thead>
+    {{#each data.records}}
+    <tr>
+        <td><a class='btn btn-md btn-outline-info' href=""><i class="fas fa-info"></i></a></td>
+        <td><b>{{name}}</b></td>
+        <td>{{cable_card_no}}</td>
+        <td>{{contact_no}}</td>
+        <td> <span class="badge badge-pill {{status}}">{{status}}</span></td>
+        <td><a class='btn btn-md btn-outline-primary' href=""><i class="fas fa-user-edit"></i></a></td>
+
+
+
+    </tr>
+
+    {{/each}}
+</table>
+
+{{#if data.records}}
+<div>
+    <nav aria-label="Page navigation example">
+        <ul class="p-2 grey lighten-2 pagination pg-blue">
+
+
+            {{#each data.pages}}
+            <li class="mx-1 page-item {{active}}"><a href="/admin/customer/manage/{{number}}" class="page-link">{{number}}</a></li>
+            {{/each}}
+
+        </ul>
+    </nav>
+
+</div>
+{{/if}}

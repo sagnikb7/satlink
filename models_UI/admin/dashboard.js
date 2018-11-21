@@ -62,7 +62,7 @@ var uiElements = [{
                 link: '/admin/customer/add'
             }, {
                 title: 'Manage',
-                link: ''
+                link: '/admin/customer/manage/1'
             },
             {
                 title: 'Change Login',
